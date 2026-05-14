@@ -33,5 +33,6 @@
    (princ "OK\n")
    (fgets)
    (princ "")
+  )
 )
 
