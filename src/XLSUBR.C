@@ -435,47 +435,23 @@ static struct node *foreach(args)
     return (val);
 }
 
-/* fif - builtin function if */
+/* fif - builtin function if (Modified by @DragonballEZ) */
 static struct node *fif(args)
   struct node *args;
 {
-    struct node *oldstk,arg,testexpr,thenexpr,elseexpr,*val;
-    int dothen;
+    struct node *oldstk,testexpr,thenexpr,elseexpr,*val;
 
     /* create a new stack frame */
-    oldstk = xlsave(&arg,&testexpr,&thenexpr,&elseexpr,NULL);
+    oldstk = xlsave(&testexpr,&thenexpr,&elseexpr,NULL);
 
-    /* initialize */
-    arg.n_ptr = args;
-
-    /* evaluate the test expression */
-    testexpr.n_ptr = xlevarg(&arg.n_ptr);
-
-    /* get the then clause */
-    thenexpr.n_ptr = xlmatch(LIST,&arg.n_ptr);
-
-    /* get the else clause */
-    if (arg.n_ptr != NULL)
-	elseexpr.n_ptr = xlmatch(LIST,&arg.n_ptr);
-    else
-	elseexpr.n_ptr = NULL;
-
-    /* make sure there aren't any more arguments */
-    xllastarg(arg.n_ptr);
-
-    /* figure out which expression to evaluate */
-    dothen = testvalue(testexpr.n_ptr);
-
-    /* default the result value to the value of the test expression */
-    val = testexpr.n_ptr;
+    /* get the test expression, then clause and else clause */
+    testexpr.n_ptr = xlarg(&args); 
+    thenexpr.n_ptr = xlarg(&args); 
+    elseexpr.n_ptr = (args ? xlarg(&args) : NULL);
+    xllastarg(args);
 
     /* evaluate the appropriate clause */
-    if (dothen)
-	while (thenexpr.n_ptr != NULL)
-	    val = xlevarg(&thenexpr.n_ptr);
-    else
-	while (elseexpr.n_ptr != NULL)
-	    val = xlevarg(&elseexpr.n_ptr);
+    val = xleval(xleval(testexpr.n_ptr) ? thenexpr.n_ptr : elseexpr.n_ptr);
 
     /* restore the previous stack frame */
     xlstack = oldstk;
