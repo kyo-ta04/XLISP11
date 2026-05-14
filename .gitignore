@@ -5,8 +5,7 @@ build/
 *.so
 *.exe
 
-src/
-*.OBJ
+src/*.OBJ
 
 # IDE
 .vscode/settings.json
