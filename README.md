@@ -154,7 +154,7 @@ C\XLISP11\SRC>dir i:
 XLISPを起動すると、プロンプト `>` が表示されます：
 
 ```lisp
-C\XLISP11\SRC>cpm.exe XLISP11A.COM
+C\XLISP11>cpm.exe XLISP11A.COM
 XLISP version 1.1a
 > (+ 1 2 3)
 6
@@ -170,7 +170,7 @@ factorial
 ASCIARTの実行例:
 
 ```
-C\XLISP11\SRC>cpm.exe XLISP.COM
+C\XLISP11>cpm.exe XLISP11A.COM
 XLISP version 1.1
 > (defun mandel ()
  1 >  (setq F 50)
@@ -239,7 +239,7 @@ OK
 
 if関数使用版
 ```
-C\XLISP11\>cpm.exe XLISP11A.COM
+C\XLISP11>cpm.exe XLISP11A.COM
 XLISP version 1.1a
 > (defun mandel ()
  1 >  (fgets)
