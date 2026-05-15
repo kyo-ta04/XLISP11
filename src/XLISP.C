@@ -45,7 +45,7 @@ main(argc,argv)
     if (argc > 1)
 	xlfin(argv[1]);
     else
-	printf("XLISP version 1.1\n");
+	printf("XLISP version 1.1a\n");
 
     /* main command processing loop */
     while (TRUE) {
